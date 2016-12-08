@@ -3,13 +3,14 @@ import React from 'react'
 
 const DefaultGeolocateOptions = {
   enableHighAccuracy: true,
-  timeout: 20000,
+  timeout: 2000,
   maximumAge: 1000
 }
 
 const withCurrentLocation = (
   Base: typeof React.Component | Function,
-  geolocationOptions: Object = {}
+  geolocationOptions: Object = {},
+  watchLocation: bool = false
 ): ReactClass<{}> => {
   return class extends React.Component {
     state: {
@@ -24,6 +25,7 @@ const withCurrentLocation = (
     }
 
     componentWillMount() {
+      console.log('WILL MOUNTR')
       const getLocationSucc = (currentLocation: Position) => {
         console.log('Got location', currentLocation)
         this.setState({ currentLocation })
@@ -38,11 +40,19 @@ const withCurrentLocation = (
         geolocationOptions
       }
 
-      this.watchId = navigator.geolocation.watchPosition(
-        getLocationSucc,
-        getLocationFail,
-        opts
-      )
+      if (watchLocation) {
+        this.watchId = navigator.geolocation.watchPosition(
+          getLocationSucc,
+          getLocationFail,
+          opts
+        )
+      } else {
+        navigator.geolocation.getCurrentPosition(
+          getLocationSucc,
+          getLocationFail,
+          opts
+        )
+      }
     }
 
     componentWillUnmount() {
