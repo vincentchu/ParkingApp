@@ -12,8 +12,6 @@ const InitRegion = {
 }
 
 const MapViewBase = (props: { currentLocation: ?Position }) => {
-  console.log('Injected with:', props.currentLocation)
-
   let region = {}
   let marker
 

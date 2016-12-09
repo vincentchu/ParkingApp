@@ -25,9 +25,7 @@ const withCurrentLocation = (
     }
 
     componentWillMount() {
-      console.log('WILL MOUNTR')
       const getLocationSucc = (currentLocation: Position) => {
-        console.log('Got location', currentLocation)
         this.setState({ currentLocation })
       }
 
