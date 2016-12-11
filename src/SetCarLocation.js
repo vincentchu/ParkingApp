@@ -1,8 +1,8 @@
 // @flow
 import React from 'react'
 import MapView from 'react-native-maps'
-import { Text, StyleSheet, View, Navigator, NavigatorIOS, TouchableHighlight } from 'react-native';
-import { Button, NavigationBar, Title, Row, Icon } from '@shoutem/ui'
+import { Text, StyleSheet, View } from 'react-native';
+import { Button, NavigationBar, Title, Icon } from '@shoutem/ui'
 import MapSelectorView from './MapSelectorView'
 
 const SetCarLocation = (props: Object) => {

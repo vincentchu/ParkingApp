@@ -1,7 +1,6 @@
 // @flow
 import React from 'react'
-import { Text, StyleSheet, View, Navigator, NavigatorIOS, TouchableHighlight } from 'react-native';
-import { Button, NavigationBar, Title, Row, Icon } from '@shoutem/ui'
+import { Navigator } from 'react-native';
 import SetCarLocation from './SetCarLocation'
 
 const Routes = [
