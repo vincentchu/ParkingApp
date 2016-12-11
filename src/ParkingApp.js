@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import { Text, StyleSheet, View, Navigator, NavigatorIOS, TouchableHighlight } from 'react-native';
-import { Button, NavigationBar, Title, Row } from '@shoutem/ui'
+import { Button, NavigationBar, Title, Row, Icon } from '@shoutem/ui'
 import MapView from 'react-native-maps'
 import withCurrentLocation from './with-current-location'
 
@@ -53,10 +53,15 @@ const renderScene = (route, nav) => {
     <View style={{flex: 1}}>
       <View style={{flex: 1}}>
         <MapViewWrapped />
-        <NavigationBar styleName="fade" centerComponent={<Title>TITLE</Title>} />
+        <NavigationBar styleName="fade" centerComponent={<Title>Set Location</Title>} />
       </View>
-      <View style={{height: 30}}>
-        <Text>Here</Text>
+      <View style={{height: 80}}>
+        <Row>
+          <Button styleName="confirmation">
+            <Icon name="add-event" />
+            <Text>Park Car</Text>
+          </Button>
+        </Row>
       </View>
     </View>
   )
