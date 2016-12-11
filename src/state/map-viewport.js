@@ -7,8 +7,8 @@ export type MapRegion = {
   longitudeDelta: number,
 }
 
-const deltaLat = 0.01534
-const deltaLong = 0.00702
+export const deltaLat = 0.01534
+export const deltaLong = 0.00702
 
 const InitialRegion = {
   latitude: 40.78825,

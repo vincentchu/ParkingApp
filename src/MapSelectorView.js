@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 import MapView from 'react-native-maps'
 import { connect } from 'react-redux'
 import withCurrentLocation from './with-current-location'
-import { updateRegion } from './state/map-viewport'
+import { updateRegion, deltaLat, deltaLong } from './state/map-viewport'
 
 import type { MapRegion } from './state/map-viewport'
 
@@ -41,8 +41,8 @@ class UpdateWithCurrentLocation extends React.Component {
       const region = {
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
-        latitudeDelta: 0.01534,
-        longitudeDelta: 0.00702,
+        latitudeDelta: deltaLat,
+        longitudeDelta: deltaLong,
       }
 
       this.props.dispatch(updateRegion(region))

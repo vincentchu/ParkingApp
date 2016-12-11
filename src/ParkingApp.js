@@ -21,7 +21,7 @@ export default class ParkingApp extends React.Component {
   render() {
     return (
       <Provider store={reduxStore}>
-        <Navigator initialRoute={Routes.ParkedView} style={{flex: 1}} renderScene={router} />
+        <Navigator initialRoute={Routes.MapView} style={{flex: 1}} renderScene={router} />
       </Provider>
     )
   }
