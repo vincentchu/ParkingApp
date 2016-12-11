@@ -67,6 +67,7 @@ class UpdateWithCurrentLocation extends React.Component {
 
   props: {
     dispatch: Function,
+    mapViewport: MapRegion,
   }
 
   render () {
