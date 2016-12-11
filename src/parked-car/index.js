@@ -113,9 +113,7 @@ const mapStateToProps = (state: {
 }
 
 
-const mapDispatchToProps = (
-  { unparkCar }
-)
+const mapDispatchToProps = { unparkCar }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   withCurrentLocation(ParkedCar, {}, true)
