@@ -1,8 +1,9 @@
 // @flow
+import React from 'react'
 import { Dimensions, Text } from 'react-native'
 import { Icon, NavigationBar, Row, Subtitle, Title, View } from '@shoutem/ui'
 import CarLocation from './CarLocation'
-import React from 'react'
+import SimpleButton from '../SimpleButton'
 
 const LocationRow = (props: {
   icon: string,
@@ -33,6 +34,7 @@ const ParkedCar = () => {
         <LocationRow icon="pin" text={'2471 Bryant St.\nSan Francisco, CA 94110'} />
         <LocationRow icon="ic_events" text={'Parked 20 minutes ago'} />
         <LocationRow icon="ic_books" text={'3 miles away'} />
+        <SimpleButton icon="left-arrow" text="Set New Parking Spot" />
       </View>
     </View>
   )

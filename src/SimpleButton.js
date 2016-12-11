@@ -1,25 +1,27 @@
 // @flow
 import React from 'react'
-import { Text, Dimensions } from 'react-native'
+import { Text } from 'react-native'
 import { Button, Icon, View } from '@shoutem/ui'
 
-const buttonWidth = 300
-const buttonHeight = 40
+export const ButtonWidth = 300
+export const ButtonHeight = 40
 
 const SimpleButton = (props: {
   icon: string,
   text: string,
+  style?: Object,
   onPress?: Function,
 }) => {
-  const { height, width } = Dimensions.get('window')
-  const { icon, text, onPress } = props
+  const { icon, text, style, onPress } = props
+
+  const baseStyle = {
+    width: ButtonWidth,
+    height: ButtonHeight,
+  }
 
   const buttonStyle = {
-    position: 'absolute',
-    width: buttonWidth,
-    height: buttonHeight,
-    top: height - 2 * buttonHeight,
-    left: (width - buttonWidth) / 2,
+    ...baseStyle,
+    ...(style || {}),
   }
 
   return (
