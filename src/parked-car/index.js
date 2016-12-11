@@ -7,6 +7,7 @@ import { Icon, NavigationBar, Row, Subtitle, Title, View } from '@shoutem/ui'
 import CarLocation from './CarLocation'
 import SimpleButton from '../SimpleButton'
 import { unparkCar } from '../state/parking-spot'
+import withCurrentLocation from '../with-current-location'
 
 import type { ParkingSpot } from '../state/parking-spot'
 
@@ -35,12 +36,16 @@ const ParkedCar = (props: {
   unparkCar: Function,
   parkedAt: Date,
   address?: string,
+  location: ?Position
 }) => {
   const { height } = Dimensions.get('window')
   const onPress = () => {
     props.unparkCar()
     props.nav.pop()
   }
+
+  let distance = 'Resolving ...'
+  if (props.location) distance = 'GOt local!'
 
   return (
     <View style={{ flex: 1 }}>
@@ -53,7 +58,7 @@ const ParkedCar = (props: {
           <TimeAgo time={props.parkedAt} />
         </LocationRow>
 
-        <LocationRow icon="ic_books" text={'3 miles away'} />
+        <LocationRow icon="ic_books" text={distance} />
 
         <SimpleButton icon="left-arrow" text="Set New Parking Spot" onPress={onPress} />
       </View>
@@ -80,4 +85,6 @@ const mapDispatchToProps = (
   { unparkCar }
 )
 
-export default connect(mapStateToProps, mapDispatchToProps)(ParkedCar)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withCurrentLocation(ParkedCar, {}, true)
+)
