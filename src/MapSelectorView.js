@@ -50,32 +50,39 @@ class MapViewBase extends React.Component {
 
       this.setState({
         region,
-        middle: coords,
+        middle: {
+          latitude: coords.latitude,
+          longitude: coords.longitude,
+        },
       })
     }
   }
 
-  regionUpdated = (region: {
-    latitude: number,
-    longitude: number,
-    latitudeDelta: number,
-    longitudeDelta: number,
-  }) => {
+  regionUpdated = (region
+    // : {
+    // latitude: number,
+    // longitude: number,
+    // latitudeDelta: number,
+    // longitudeDelta: number,
+  ) => {
+    console.log('REGION', region)
     // const latitude = (region.latitude + region.latitudeDelta) / 2
     // const longitude = (region.longitude + region.longitudeDelta) / 2
     //
-    // this.setState({
-    //   middleOfRegion: {
-    //     latitude: latitude,
-    //     longitude: longitude,
-    //   }
-    // })
+    this.setState({
+      region,
+      middle: {
+        latitude: region.latitude,
+        longitude: region.longitude,
+      }
+    })
   }
 
   render() {
     const region = this.state.region || InitRegion
     const middle = this.state.middle
 
+    console.log('MIDDLE', middle)
     return (
       <MapView style={StyleSheet.absoluteFillObject} showsUserLocation region={region} onRegionChange={this.regionUpdated}>
         { middle && <MapView.Marker coordinate={middle}/>}
