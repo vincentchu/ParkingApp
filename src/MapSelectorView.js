@@ -20,7 +20,7 @@ class MapViewBase extends React.Component {
   }
 
   state: {
-    region?: {
+    region: {
       latitude: number,
       longitude: number,
       latitudeDelta: number,
@@ -30,7 +30,9 @@ class MapViewBase extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      region: InitRegion,
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -53,7 +55,7 @@ class MapViewBase extends React.Component {
   }
 
   render() {
-    const region = this.state.region || InitRegion
+    const region = this.state.region
     const middle = {
       latitude: region.latitude,
       longitude: region.longitude,
