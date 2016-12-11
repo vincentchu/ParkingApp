@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import Routes from './routes'
 import reduxStore from './redux-store'
 import SetCarLocation from './set-car-location'
-import ParkedCar from './ParkedCar'
+import ParkedCar from './parked-car'
 
 const router = (route, nav) => {
   switch (route.name) {

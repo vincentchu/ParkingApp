@@ -3,10 +3,10 @@ import React from 'react'
 import { Navigator, Text, Dimensions, StyleSheet } from 'react-native';
 import { connect } from 'react-redux'
 import MapView from 'react-native-maps'
-import { Button, NavigationBar, Title, Image, Icon, Row, View, Subtitle, Caption } from '@shoutem/ui'
-import { deltaLat, deltaLong } from './state/map-viewport'
+import { Button, NavigationBar, Title, Image, Icon, Row, View, Subtitle, Caption, Spinner } from '@shoutem/ui'
+import { deltaLat, deltaLong } from '../state/map-viewport'
 
-import type { MapRegion } from './state/map-viewport'
+import type { MapRegion } from '../state/map-viewport'
 
 const CarLocationBase = (props: {
   height: number,
@@ -70,6 +70,9 @@ const ParkedCar = (props: { nav: Navigator }) => {
           <View styleName="vertical">
             <Subtitle>3 miles away</Subtitle>
           </View>
+        </Row>
+        <Row>
+          <Spinner size="large" />
         </Row>
       </View>
     </View>
