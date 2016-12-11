@@ -9,6 +9,24 @@ import { deltaLat, deltaLong } from '../state/map-viewport'
 
 import type { MapRegion } from '../state/map-viewport'
 
+const LocationRow = (props: {
+  icon: string,
+  text: string
+}) => {
+  const { icon, text } = props
+
+  return (
+    <Row>
+      <Icon name={icon} />
+      <View styleName="vertical">
+        <Subtitle>
+          <Text styleName="multiline">{text}</Text>
+        </Subtitle>
+      </View>
+    </Row>
+  )
+}
+
 const ParkedCar = (props: { nav: Navigator }) => {
   const onPress = () => props.nav.pop()
   const { height, width } = Dimensions.get('window')
@@ -18,26 +36,9 @@ const ParkedCar = (props: { nav: Navigator }) => {
       <CarLocation height={height} />
       <NavigationBar centerComponent={<Title>Car Parked</Title>} />
       <View style={{ flex: 1, padding: 35 }}>
-        <Row>
-          <Icon name="pin" />
-          <View styleName="vertical">
-            <Subtitle>
-              <Text styleName="multiline">{"2471 Bryant St.\nSan Francisco, CA 94110"}</Text>
-            </Subtitle>
-          </View>
-        </Row>
-        <Row>
-          <Icon name="ic_events" />
-          <View styleName="vertical">
-            <Subtitle>Parked 20 Minutes Ago</Subtitle>
-          </View>
-        </Row>
-        <Row>
-          <Icon name="ic_books" />
-          <View styleName="vertical">
-            <Subtitle>3 miles away</Subtitle>
-          </View>
-        </Row>
+        <LocationRow icon="pin" text={'2471 Bryant St.\nSan Francisco, CA 94110'} />
+        <LocationRow icon="ic_events" text={'Parked 20 minutes ago'} />
+        <LocationRow icon="ic_books" text={'3 miles away'} />
         <Row>
           <Spinner size="large" />
         </Row>
