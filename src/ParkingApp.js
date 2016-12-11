@@ -1,11 +1,13 @@
 // @flow
 import React from 'react'
 import { Navigator } from 'react-native'
-import { Provider } from 'react-redux'
+import { connect, Provider } from 'react-redux'
 import Routes from './routes'
 import reduxStore from './redux-store'
 import SetCarLocation from './set-car-location'
 import ParkedCar from './parked-car'
+
+import type { ParkingSpot } from './state/parking-spot'
 
 const router = (route, nav) => {
   switch (route.name) {
@@ -17,9 +19,27 @@ const router = (route, nav) => {
   }
 }
 
+const NavigatorBase = (props: { isParked: bool }) => {
+  const initialRoute = props.isParked ? Routes.ParkedView : Routes.MapView
+
+  return (
+    <Navigator initialRoute={initialRoute} style={{ flex: 1 }} renderScene={router} />
+  )
+}
+
+const mapStateToProps = (state: {
+  parkingSpot: ParkingSpot,
+}) => {
+  const isParked = state.parkingSpot.isParked
+
+  return { isParked }
+}
+
+const ConnectedNavigator = connect(mapStateToProps)(NavigatorBase)
+
 const ParkingApp = () => (
   <Provider store={reduxStore}>
-    <Navigator initialRoute={Routes.MapView} style={{ flex: 1 }} renderScene={router} />
+    <ConnectedNavigator />
   </Provider>
 )
 
