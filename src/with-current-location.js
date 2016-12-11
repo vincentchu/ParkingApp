@@ -25,9 +25,7 @@ const withCurrentLocation = (
     }
 
     componentWillMount() {
-      console.log('with current locaton will mlount')
       const getLocationSucc = (currentLocation: Position) => {
-        console.log('getLocationSucc', this.watchId)
         this.watchId !== null && this.setState({ currentLocation })
       }
 
@@ -41,13 +39,11 @@ const withCurrentLocation = (
       }
 
       if (watchLocation) {
-        console.log('WATCH LOC')
         this.watchId = navigator.geolocation.watchPosition(
           getLocationSucc,
           getLocationFail,
           opts
         )
-        console.log('AFTER SET', this.watchId)
       } else {
         this.watchId = navigator.geolocation.getCurrentPosition(
           getLocationSucc,
@@ -58,13 +54,11 @@ const withCurrentLocation = (
     }
 
     componentWillUnmount() {
-      console.log('with current locaton will UNMUNT')
       this.watchId !== null && navigator.geolocation.clearWatch(this.watchId)
       this.watchId = null
     }
 
     render() {
-      console.log('with current loc render')
       return (
         <Base location={this.state.currentLocation} {...this.props} />
       )
