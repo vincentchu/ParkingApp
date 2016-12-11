@@ -8,7 +8,7 @@ export const ButtonHeight = 40
 
 const SimpleButton = (props: {
   icon: string,
-  text: string,
+  text?: string,
   style?: Object,
   onPress?: Function,
 }) => {

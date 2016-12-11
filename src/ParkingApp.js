@@ -23,7 +23,7 @@ const NavigatorBase = (props: { isParked: bool }) => {
   const initialRoute = props.isParked ? Routes.ParkedView : Routes.MapView
 
   return (
-    <Navigator initialRoute={initialRoute} style={{ flex: 1 }} renderScene={router} />
+    <Navigator initialRoute={initialRoute} renderScene={router} />
   )
 }
 
