@@ -8,7 +8,7 @@ const deltaLat = 0.01534
 const deltaLong = 0.00702
 
 const InitRegion = {
-  latitude: 37.78825,
+  latitude: 40.78825,
   longitude: -122.4324,
   latitudeDelta: deltaLat,
   longitudeDelta: deltaLong,
@@ -26,10 +26,6 @@ class MapViewBase extends React.Component {
       latitudeDelta: number,
       longitudeDelta: number,
     },
-    middle?: {
-      latitude: number,
-      longitude: number,
-    },
   }
 
   constructor(props) {
@@ -39,53 +35,33 @@ class MapViewBase extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const location = nextProps.location
+
     if (location) {
-      const coords = location.coords
       const region = {
-        latitude: coords.latitude,
-        longitude: coords.longitude,
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
         latitudeDelta: deltaLat,
         longitudeDelta: deltaLong,
       }
 
-      this.setState({
-        region,
-        middle: {
-          latitude: coords.latitude,
-          longitude: coords.longitude,
-        },
-      })
+      this.setState({ region })
     }
   }
 
-  regionUpdated = (region
-    // : {
-    // latitude: number,
-    // longitude: number,
-    // latitudeDelta: number,
-    // longitudeDelta: number,
-  ) => {
-    console.log('REGION', region)
-    // const latitude = (region.latitude + region.latitudeDelta) / 2
-    // const longitude = (region.longitude + region.longitudeDelta) / 2
-    //
-    this.setState({
-      region,
-      middle: {
-        latitude: region.latitude,
-        longitude: region.longitude,
-      }
-    })
+  regionUpdated = (region) => {
+    this.setState({ region })
   }
 
   render() {
     const region = this.state.region || InitRegion
-    const middle = this.state.middle
+    const middle = {
+      latitude: region.latitude,
+      longitude: region.longitude,
+    }
 
-    console.log('MIDDLE', middle)
     return (
       <MapView style={StyleSheet.absoluteFillObject} showsUserLocation region={region} onRegionChange={this.regionUpdated}>
-        { middle && <MapView.Marker coordinate={middle}/>}
+        <MapView.Marker coordinate={middle}/>
       </MapView>
     )
   }
