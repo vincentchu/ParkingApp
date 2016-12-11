@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native'
 import MapView from 'react-native-maps'
 import { connect } from 'react-redux'
 import { updateRegion, deltaLat, deltaLong } from '../state/map-viewport'
@@ -10,29 +10,28 @@ import type { MapRegion } from '../state/map-viewport'
 const MapViewBase = (props: {
   dispatch: Function,
   mapViewport: MapRegion,
-  location?: Position,
 }) => {
-  const { dispatch, mapViewport, location } = props
+  const { dispatch, mapViewport } = props
 
   const middle = {
     latitude: mapViewport.latitude,
     longitude: mapViewport.longitude,
   }
 
-  const viewportUpdated = (region) => {
+  const viewportUpdated = region => {
     dispatch(updateRegion(region))
   }
 
   return (
     <MapView style={StyleSheet.absoluteFillObject} showsUserLocation region={mapViewport} onRegionChange={viewportUpdated}>
-      <MapView.Marker coordinate={middle}/>
+      <MapView.Marker coordinate={middle} />
     </MapView>
   )
 }
 
-const mapStateToProps = (state: { mapViewport: MapRegion }) => {
-  return { mapViewport: state.mapViewport }
-}
+const mapStateToProps = (state: { mapViewport: MapRegion }) => (
+  { mapViewport: state.mapViewport }
+)
 
 class UpdateWithCurrentLocation extends React.Component {
   componentWillMount() {
@@ -61,9 +60,13 @@ class UpdateWithCurrentLocation extends React.Component {
       {
         enableHighAccuracy: true,
         timeout: 2000,
-        maximumAge: 1000
+        maximumAge: 1000,
       }
     )
+  }
+
+  props: {
+    dispatch: Function,
   }
 
   render () {
