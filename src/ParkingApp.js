@@ -10,7 +10,7 @@ import ParkedCar from './ParkedCar'
 const router = (route, nav) => {
   switch (route.name) {
     case Routes.MapView.name:
-      return (<SetCarLocation nav={nav}/>)
+      return (<SetCarLocation nav={nav} />)
 
     case Routes.ParkedView.name:
       return (<ParkedCar nav={nav} />)
