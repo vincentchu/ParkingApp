@@ -59,7 +59,7 @@ const withCurrentLocation = (
 
     render() {
       return (
-        <Base currentLocation={this.state.currentLocation} {...this.props} />
+        <Base location={this.state.currentLocation} {...this.props} />
       )
     }
   }

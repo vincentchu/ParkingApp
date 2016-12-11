@@ -19,8 +19,6 @@ const SetLocationButton = () => {
     left: (width - buttonWidth)/2,
   }
 
-  console.log(buttonStyle)
-
   return (
     <View style={buttonStyle}>
       <Button styleName="confirmation">
@@ -31,14 +29,12 @@ const SetLocationButton = () => {
   )
 }
 
-const SetCarLocation = (props: Object) => {
-  return (
-    <View style={{flex: 1}}>
-      <MapSelectorView />
-      <NavigationBar styleName="fade" centerComponent={<Title>Set Location</Title>} />
-      <SetLocationButton />
-    </View>
-  )
-}
+const SetCarLocation = (props: Object) => (
+  <View style={{flex: 1}}>
+    <MapSelectorView />
+    <NavigationBar centerComponent={<Title>Set Location</Title>} />
+    <SetLocationButton />
+  </View>
+)
 
 export default SetCarLocation
