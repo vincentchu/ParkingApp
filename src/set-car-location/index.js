@@ -10,12 +10,12 @@ import { parkCar } from '../state/parking-spot'
 
 const SetLocationButtonBase = (props: {
   nav: Navigator,
-  setLocation: Function,
+  parkCar: Function,
 }) => {
   const { height, width } = Dimensions.get('window')
 
   const onPress = () => {
-    props.setLocation()
+    props.parkCar()
     props.nav.push(Routes.ParkedView)
   }
 
@@ -31,7 +31,7 @@ const SetLocationButtonBase = (props: {
 }
 
 const mapDispatchToProps = () => (
-  { setLocation: () => parkCar() }
+  { parkCar }
 )
 
 const SetLocationButton = connect(undefined, mapDispatchToProps)(SetLocationButtonBase)

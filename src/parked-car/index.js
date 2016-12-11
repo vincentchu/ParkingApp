@@ -1,9 +1,11 @@
 // @flow
 import React from 'react'
+import { connect } from 'react-redux'
 import { Dimensions, Navigator, Text } from 'react-native'
 import { Icon, NavigationBar, Row, Subtitle, Title, View } from '@shoutem/ui'
 import CarLocation from './CarLocation'
 import SimpleButton from '../SimpleButton'
+import { unparkCar } from '../state/parking-spot'
 
 const LocationRow = (props: {
   icon: string,
@@ -23,9 +25,13 @@ const LocationRow = (props: {
   )
 }
 
-const ParkedCar = (props: { nav: Navigator }) => {
+const ParkedCar = (props: {
+  nav: Navigator,
+  unparkCar: Function,
+}) => {
   const { height } = Dimensions.get('window')
   const onPress = () => {
+    props.unparkCar()
     props.nav.pop()
   }
 
@@ -43,4 +49,8 @@ const ParkedCar = (props: { nav: Navigator }) => {
   )
 }
 
-export default ParkedCar
+const mapDispatchToProps = (
+  { unparkCar }
+)
+
+export default connect(undefined, mapDispatchToProps)(ParkedCar)
