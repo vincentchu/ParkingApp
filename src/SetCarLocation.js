@@ -1,21 +1,42 @@
 // @flow
 import React from 'react'
 import MapView from 'react-native-maps'
-import { Text, StyleSheet, View } from 'react-native';
+import { Text, StyleSheet, View, Dimensions } from 'react-native';
 import { Button, NavigationBar, Title, Icon } from '@shoutem/ui'
 import MapSelectorView from './MapSelectorView'
+
+const buttonWidth = 300
+const buttonHeight = 40
+
+const SetLocationButton = () => {
+  const { height, width } = Dimensions.get('window')
+
+  const buttonStyle = {
+    position: 'absolute',
+    width: buttonWidth,
+    height: buttonHeight,
+    top: height - (2 * buttonHeight),
+    left: (width - buttonWidth)/2,
+  }
+
+  console.log(buttonStyle)
+
+  return (
+    <View style={buttonStyle}>
+      <Button styleName="confirmation">
+        <Icon name="pin" />
+        <Text>Set Car Location</Text>
+      </Button>
+    </View>
+  )
+}
 
 const SetCarLocation = (props: Object) => {
   return (
     <View style={{flex: 1}}>
       <MapSelectorView />
       <NavigationBar styleName="fade" centerComponent={<Title>Set Location</Title>} />
-      <View style={{position: 'absolute', width: 300, height: 40, top: 200}}>
-        <Button styleName="confirmation">
-          <Icon name="add-event" />
-          <Text>Park Car</Text>
-        </Button>
-      </View>
+      <SetLocationButton />
     </View>
   )
 }
