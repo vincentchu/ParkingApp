@@ -59,7 +59,8 @@ const withCurrentLocation = (
 
     componentWillUnmount() {
       console.log('with current locaton will UNMUNT')
-      this.watchId && navigator.geolocation.clearWatch(this.watchId)
+      this.watchId !== null && navigator.geolocation.clearWatch(this.watchId)
+      this.watchId = null
     }
 
     render() {

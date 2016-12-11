@@ -26,7 +26,8 @@ module.exports = {
     'react/jsx-curly-spacing': [2, 'never'],
     'react-native/no-inline-styles': 'off',
     'react/jsx-max-props-per-line': 'off',
-    'react/jsx-sort-props': 'off'
+    'react/jsx-sort-props': 'off',
+    'react/no-unused-prop-types': 'off',
   },
   globals: {
     Position: true,
