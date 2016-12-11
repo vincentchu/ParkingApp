@@ -4,7 +4,7 @@ import { Navigator } from 'react-native';
 import { Provider } from 'react-redux'
 import Routes from './routes'
 import reduxStore from './redux-store'
-import SetCarLocation from './SetCarLocation'
+import SetCarLocation from './set-car-location'
 import ParkedCar from './ParkedCar'
 
 const router = (route, nav) => {

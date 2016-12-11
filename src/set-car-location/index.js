@@ -3,7 +3,7 @@ import React from 'react'
 import MapView from 'react-native-maps'
 import { Navigator, Text, StyleSheet, View, Dimensions } from 'react-native';
 import { Button, NavigationBar, Title, Icon } from '@shoutem/ui'
-import Routes from './routes'
+import Routes from '../routes'
 import MapSelectorView from './MapSelectorView'
 
 const buttonWidth = 300

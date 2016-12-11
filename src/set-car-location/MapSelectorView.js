@@ -3,10 +3,9 @@ import React from 'react'
 import { StyleSheet } from 'react-native';
 import MapView from 'react-native-maps'
 import { connect } from 'react-redux'
-import withCurrentLocation from './with-current-location'
-import { updateRegion, deltaLat, deltaLong } from './state/map-viewport'
+import { updateRegion, deltaLat, deltaLong } from '../state/map-viewport'
 
-import type { MapRegion } from './state/map-viewport'
+import type { MapRegion } from '../state/map-viewport'
 
 const MapViewBase = (props: {
   dispatch: Function,
