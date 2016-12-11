@@ -46,7 +46,13 @@ class MapViewBase extends React.Component {
         longitudeDelta: deltaLong,
       }
 
-      this.setState({ region })
+      // n.b.: This fixes a weird UI issue; if setState isn't called
+      // in a setTimeout, then the pin will not render when the current location
+      // is obtained. I think that calling setTimeout allows the view to "stutter"
+      // a bit, causing the pin to render.
+      setTimeout(() => {
+        this.setState({ region })
+      }, 0)
     }
   }
 
