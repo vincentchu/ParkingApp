@@ -1,37 +1,18 @@
 // @flow
 import React from 'react'
-import geolib from 'geolib'
 import TimeAgo from 'react-native-timeago'
 import { connect } from 'react-redux'
 import { Dimensions, Navigator } from 'react-native'
 import { NavigationBar, Title, View } from '@shoutem/ui'
 import CarLocation from './CarLocation'
 import LocationRow from './LocationRow'
+import distanceInWords from './distance-in-words'
 import SimpleButton from '../SimpleButton'
 import { unparkCar } from '../state/parking-spot'
 import withCurrentLocation from '../with-current-location'
 
 import type { ParkingSpot } from '../state/parking-spot'
 import type { MapRegion } from '../state/map-viewport'
-
-const MileInFeet = 5280
-
-const distanceInWords = (pos1: Object, pos2: Object): string => {
-  const distanceInMeters = geolib.getDistance(pos1, pos2)
-
-  const distanceInFeet = geolib.convertUnit('ft', distanceInMeters, 0)
-  let distancePhrase = ''
-
-  if (distanceInFeet < MileInFeet / 2) distancePhrase = `${distanceInFeet} feet away`
-  else {
-    const distanceInMiles = geolib.convertUnit('mi', distanceInMeters, 0)
-    const unit = (distanceInMiles === 1) ? 'mile' : 'miles'
-    distancePhrase = `${distanceInMiles} ${unit} away`
-  }
-
-  return distancePhrase
-}
-
 
 const ParkedCar = (props: {
   nav: Navigator,
@@ -47,9 +28,7 @@ const ParkedCar = (props: {
     props.nav.pop()
   }
 
-  let distance = 'Resolving ...'
-  if (props.location)
-    distance = distanceInWords(props.location.coords, props.parkedAtCoords)
+  const distance = props.location ? distanceInWords(props.location.coords, props.parkedAtCoords) : 'Resolving ...'
 
   return (
     <View style={{ flex: 1 }}>
