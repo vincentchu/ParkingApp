@@ -51,17 +51,13 @@ const Routes = [
 const renderScene = (route, nav) => {
   return (
     <View style={{flex: 1}}>
-      <View style={{flex: 1}}>
-        <MapViewWrapped />
-        <NavigationBar styleName="fade" centerComponent={<Title>Set Location</Title>} />
-      </View>
-      <View style={{height: 80}}>
-        <Row>
-          <Button styleName="confirmation">
-            <Icon name="add-event" />
-            <Text>Park Car</Text>
-          </Button>
-        </Row>
+      <MapViewWrapped />
+      <NavigationBar styleName="fade" centerComponent={<Title>Set Location</Title>} />
+      <View style={{position: 'absolute', width: 300, height: 40, top: 200}}>
+        <Button styleName="confirmation">
+          <Icon name="add-event" />
+          <Text>Park Car</Text>
+        </Button>
       </View>
     </View>
   )
