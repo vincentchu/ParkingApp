@@ -1,5 +1,6 @@
 // @flow
 import React from 'react'
+import geolib from 'geolib'
 import TimeAgo from 'react-native-timeago'
 import { connect } from 'react-redux'
 import { Dimensions, Navigator, Text } from 'react-native'
@@ -10,6 +11,7 @@ import { unparkCar } from '../state/parking-spot'
 import withCurrentLocation from '../with-current-location'
 
 import type { ParkingSpot } from '../state/parking-spot'
+import type { MapRegion } from '../state/map-viewport'
 
 const LocationRow = (props: {
   icon: string,
@@ -34,6 +36,7 @@ const LocationRow = (props: {
 const ParkedCar = (props: {
   nav: Navigator,
   unparkCar: Function,
+  parkedAtCoords: { latitude: number, longitude: number },
   parkedAt: Date,
   address?: string,
   location: ?Position
@@ -45,7 +48,14 @@ const ParkedCar = (props: {
   }
 
   let distance = 'Resolving ...'
-  if (props.location) distance = 'GOt local!'
+  if (props.location) {
+    const distanceInMeters = geolib.getDistance(
+      props.location.coords,
+      props.parkedAtCoords
+    )
+
+    distance = `${ distanceInMeters } m away`
+  }
 
   return (
     <View style={{ flex: 1 }}>
@@ -68,13 +78,21 @@ const ParkedCar = (props: {
 
 const mapStateToProps = (state: {
   parkingSpot: ParkingSpot,
+  mapViewport: MapRegion,
 }) => {
   const {
     parkedAt,
     address,
   } = state.parkingSpot
 
+
+  const parkedAtCoords = {
+    latitude: state.mapViewport.latitude,
+    longitude: state.mapViewport.longitude,
+  }
+
   return {
+    parkedAtCoords,
     parkedAt,
     address,
   }

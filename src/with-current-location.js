@@ -26,7 +26,7 @@ const withCurrentLocation = (
 
     componentWillMount() {
       const getLocationSucc = (currentLocation: Position) => {
-        this.setState({ currentLocation })
+        this.watchId && this.setState({ currentLocation })
       }
 
       const getLocationFail = (error: Object) => {
@@ -45,7 +45,7 @@ const withCurrentLocation = (
           opts
         )
       } else {
-        navigator.geolocation.getCurrentPosition(
+        this.watchId = navigator.geolocation.getCurrentPosition(
           getLocationSucc,
           getLocationFail,
           opts
