@@ -9,8 +9,10 @@ import MapSelectorView from './MapSelectorView'
 const buttonWidth = 300
 const buttonHeight = 40
 
-const SetLocationButton = ({ onPress }) => {
+const SetLocationButton = ({ onPress, nav }) => {
   const { height, width } = Dimensions.get('window')
+
+  const onPress2 = () => nav.push({ title: 'Car Location', index: 1 })
 
   const buttonStyle = {
     position: 'absolute',
@@ -22,7 +24,7 @@ const SetLocationButton = ({ onPress }) => {
 
   return (
     <View style={buttonStyle}>
-      <Button styleName="confirmation" onPress={onPress}>
+      <Button styleName="confirmation" onPress={onPress2}>
         <Icon name="pin" />
         <Text>Set Car Location</Text>
       </Button>
@@ -40,11 +42,11 @@ const mapDispatchToProps = (dispatch: Function) => {
 
 const ConnectedSetLocationButton = connect(undefined, mapDispatchToProps)(SetLocationButton)
 
-const SetCarLocation = () => (
+const SetCarLocation = ({ nav }) => (
   <View style={{flex: 1}}>
     <MapSelectorView />
     <NavigationBar centerComponent={<Title>Set Location</Title>} />
-    <ConnectedSetLocationButton />
+    <ConnectedSetLocationButton nav={nav}/>
   </View>
 )
 
