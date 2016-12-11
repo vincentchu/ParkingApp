@@ -63,8 +63,6 @@ class ParkedCarWithAddressLoading extends React.Component {
   }
 
   componentWillMount() {
-    console.log('STATE', this.state)
-
     if (!this.state.latch) {
       this.setState({ latch: true })
       reverseGeocode(this.props.parkedAtCoords).then(
