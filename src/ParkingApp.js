@@ -1,10 +1,11 @@
 // @flow
 import React from 'react'
-import { Navigator, Text } from 'react-native';
+import { Navigator } from 'react-native';
 import { Provider } from 'react-redux'
 import Routes from './routes'
 import reduxStore from './redux-store'
 import SetCarLocation from './SetCarLocation'
+import ParkedCar from './ParkedCar'
 
 const router = (route, nav) => {
   switch (route.name) {
@@ -12,7 +13,7 @@ const router = (route, nav) => {
       return (<SetCarLocation nav={nav}/>)
 
     case Routes.ParkedView.name:
-      return (<Text>Car location here</Text>)
+      return (<ParkedCar nav={nav} />)
   }
 }
 
