@@ -9,8 +9,12 @@ module.exports = {
     'recommended/react-native/style-guide'
   ],
   rules: {
-    'indent': ['error', 2],
+    'curly': ['error', 'multi-or-nest'],
+    'indent': ['error', 2, {
+      SwitchCase: 1,
+    }],
     'no-duplicate-imports': 'off',
+    'no-extra-parens': 'off',
     'object-property-newline': ['error', {
       allowMultiplePropertiesPerLine: true,
     }],
@@ -24,5 +28,6 @@ module.exports = {
   },
   globals: {
     Position: true,
+    ReactClass: true,
   }
 };

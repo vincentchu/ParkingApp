@@ -4,15 +4,15 @@ import React from 'react'
 const DefaultGeolocateOptions = {
   enableHighAccuracy: true,
   timeout: 2000,
-  maximumAge: 1000
+  maximumAge: 1000,
 }
 
 const withCurrentLocation = (
   Base: typeof React.Component | Function,
   geolocationOptions: Object = {},
   watchLocation: bool = false
-): ReactClass<{}> => {
-  return class extends React.Component {
+): ReactClass<{}> => (
+  class extends React.Component {
     state: {
       currentLocation?: Position,
     }
@@ -35,7 +35,7 @@ const withCurrentLocation = (
 
       const opts = {
         ...DefaultGeolocateOptions,
-        geolocationOptions
+        geolocationOptions,
       }
 
       if (watchLocation) {
@@ -63,6 +63,6 @@ const withCurrentLocation = (
       )
     }
   }
-}
+)
 
 export default withCurrentLocation

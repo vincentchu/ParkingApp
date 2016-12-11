@@ -1,7 +1,6 @@
 // @flow
 import React from 'react'
-import MapView from 'react-native-maps'
-import { Navigator, Text, StyleSheet, Dimensions } from 'react-native';
+import { Navigator, Text, Dimensions } from 'react-native'
 import { Button, NavigationBar, Title, Icon, View } from '@shoutem/ui'
 import Routes from '../routes'
 import MapSelectorView from './MapSelectorView'
@@ -9,16 +8,16 @@ import MapSelectorView from './MapSelectorView'
 const buttonWidth = 300
 const buttonHeight = 40
 
-const SetLocationButton = ({ nav }) => {
+const SetLocationButton = (props: { nav: Navigator }) => {
   const { height, width } = Dimensions.get('window')
-  const onPress = () => nav.push(Routes.ParkedView)
+  const onPress = () => props.nav.push(Routes.ParkedView)
 
   const buttonStyle = {
     position: 'absolute',
     width: buttonWidth,
     height: buttonHeight,
-    top: height - (2 * buttonHeight),
-    left: (width - buttonWidth)/2,
+    top: height - 2 * buttonHeight,
+    left: (width - buttonWidth) / 2,
   }
 
   return (
@@ -32,10 +31,10 @@ const SetLocationButton = ({ nav }) => {
 }
 
 const SetCarLocation = (props: { nav: Navigator }) => (
-  <View style={{flex: 1}}>
+  <View style={{ flex: 1 }}>
     <MapSelectorView />
     <NavigationBar centerComponent={<Title>Set Location</Title>} />
-    <SetLocationButton nav={props.nav}/>
+    <SetLocationButton nav={props.nav} />
   </View>
 )
 

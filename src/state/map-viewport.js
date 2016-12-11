@@ -33,9 +33,9 @@ export const reducer = (
   }
 }
 
-export const updateRegion = (region: MapRegion) => {
-  return {
+export const updateRegion = (region: MapRegion) => (
+  {
     type: UPDATE,
     region,
   }
-}
+)
