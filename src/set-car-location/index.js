@@ -1,8 +1,8 @@
 // @flow
 import React from 'react'
 import MapView from 'react-native-maps'
-import { Navigator, Text, StyleSheet, View, Dimensions } from 'react-native';
-import { Button, NavigationBar, Title, Icon } from '@shoutem/ui'
+import { Navigator, Text, StyleSheet, Dimensions } from 'react-native';
+import { Button, NavigationBar, Title, Icon, View } from '@shoutem/ui'
 import Routes from '../routes'
 import MapSelectorView from './MapSelectorView'
 

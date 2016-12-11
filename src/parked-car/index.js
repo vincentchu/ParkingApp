@@ -1,13 +1,8 @@
 // @flow
-import React from 'react'
-import { Navigator, Text, Dimensions, StyleSheet } from 'react-native';
-import { connect } from 'react-redux'
-import MapView from 'react-native-maps'
-import { Button, NavigationBar, Title, Image, Icon, Row, View, Subtitle, Caption, Spinner } from '@shoutem/ui'
+import { Dimensions, Text } from 'react-native'
+import { Icon, NavigationBar, Row, Subtitle, Title, View } from '@shoutem/ui'
 import CarLocation from './CarLocation'
-import { deltaLat, deltaLong } from '../state/map-viewport'
-
-import type { MapRegion } from '../state/map-viewport'
+import React from 'react'
 
 const LocationRow = (props: {
   icon: string,
@@ -27,9 +22,8 @@ const LocationRow = (props: {
   )
 }
 
-const ParkedCar = (props: { nav: Navigator }) => {
-  const onPress = () => props.nav.pop()
-  const { height, width } = Dimensions.get('window')
+const ParkedCar = () => {
+  const { height } = Dimensions.get('window')
 
   return (
     <View style={{ flex: 1 }}>
@@ -39,9 +33,6 @@ const ParkedCar = (props: { nav: Navigator }) => {
         <LocationRow icon="pin" text={'2471 Bryant St.\nSan Francisco, CA 94110'} />
         <LocationRow icon="ic_events" text={'Parked 20 minutes ago'} />
         <LocationRow icon="ic_books" text={'3 miles away'} />
-        <Row>
-          <Spinner size="large" />
-        </Row>
       </View>
     </View>
   )
