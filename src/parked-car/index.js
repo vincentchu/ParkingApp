@@ -3,35 +3,16 @@ import React from 'react'
 import geolib from 'geolib'
 import TimeAgo from 'react-native-timeago'
 import { connect } from 'react-redux'
-import { Dimensions, Navigator, Text } from 'react-native'
-import { Icon, NavigationBar, Row, Subtitle, Title, View } from '@shoutem/ui'
+import { Dimensions, Navigator } from 'react-native'
+import { NavigationBar, Title, View } from '@shoutem/ui'
 import CarLocation from './CarLocation'
+import LocationRow from './LocationRow'
 import SimpleButton from '../SimpleButton'
 import { unparkCar } from '../state/parking-spot'
 import withCurrentLocation from '../with-current-location'
 
 import type { ParkingSpot } from '../state/parking-spot'
 import type { MapRegion } from '../state/map-viewport'
-
-const LocationRow = (props: {
-  icon: string,
-  text?: string,
-  children?: any,
-}) => {
-  const { icon, text, children } = props
-
-  return (
-    <Row>
-      <Icon name={icon} />
-      <View styleName="vertical">
-        <Subtitle>
-          { text && <Text styleName="multiline">{text}</Text> }
-          { children }
-        </Subtitle>
-      </View>
-    </Row>
-  )
-}
 
 const MileInFeet = 5280
 
