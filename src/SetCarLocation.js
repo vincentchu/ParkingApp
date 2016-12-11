@@ -4,6 +4,7 @@ import MapView from 'react-native-maps'
 import { connect } from 'react-redux'
 import { Text, StyleSheet, View, Dimensions } from 'react-native';
 import { Button, NavigationBar, Title, Icon } from '@shoutem/ui'
+import Routes from './routes'
 import MapSelectorView from './MapSelectorView'
 
 const buttonWidth = 300
@@ -12,7 +13,7 @@ const buttonHeight = 40
 const SetLocationButton = ({ onPress, nav }) => {
   const { height, width } = Dimensions.get('window')
 
-  const onPress2 = () => nav.push({ title: 'Car Location', index: 1 })
+  const onPress2 = () => nav.push(Routes.ParkedView)
 
   const buttonStyle = {
     position: 'absolute',
