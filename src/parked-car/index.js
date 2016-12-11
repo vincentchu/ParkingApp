@@ -33,6 +33,25 @@ const LocationRow = (props: {
   )
 }
 
+const MileInFeet = 5280
+
+const distanceInWords = (pos1: Object, pos2: Object): string => {
+  const distanceInMeters = geolib.getDistance(pos1, pos2)
+
+  const distanceInFeet = geolib.convertUnit('ft', distanceInMeters, 0)
+  let distancePhrase = ''
+
+  if (distanceInFeet < MileInFeet / 2) distancePhrase = `${distanceInFeet} feet away`
+  else {
+    const distanceInMiles = geolib.convertUnit('mi', distanceInMeters, 0)
+    const unit = (distanceInMiles === 1) ? 'mile' : 'miles'
+    distancePhrase = `${distanceInMiles} ${unit} away`
+  }
+
+  return distancePhrase
+}
+
+
 const ParkedCar = (props: {
   nav: Navigator,
   unparkCar: Function,
@@ -48,14 +67,8 @@ const ParkedCar = (props: {
   }
 
   let distance = 'Resolving ...'
-  if (props.location) {
-    const distanceInMeters = geolib.getDistance(
-      props.location.coords,
-      props.parkedAtCoords
-    )
-
-    distance = `${ distanceInMeters } m away`
-  }
+  if (props.location)
+    distance = distanceInWords(props.location.coords, props.parkedAtCoords)
 
   return (
     <View style={{ flex: 1 }}>

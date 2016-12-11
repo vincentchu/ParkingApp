@@ -21,6 +21,7 @@ module.exports = {
     }],
     'sort-imports': 'off',
     'space-before-function-paren': 'off',
+    'template-curly-spacing': 'off',
     'react/jsx-indent': [2, 2],
     'react/jsx-curly-spacing': [2, 'never'],
     'react-native/no-inline-styles': 'off',
