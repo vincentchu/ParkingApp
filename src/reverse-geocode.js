@@ -21,8 +21,21 @@ type FetchResp = {
 const GoogleApi = 'https://maps.googleapis.com/maps/api/geocode/json'
 
 const parseResponse = (resp: FetchResp): string => {
-  console.log('GOT', resp)
-  return 'This is a resp\nfoo\nbar'
+  let addr = ''
+
+  if (resp.results[0]) {
+    const addrTokens = resp.results[0].formatted_address.split(',')
+    const [ street, city, stateZip, country ] = addrTokens
+
+    addr = [
+      street,
+      [ city, stateZip ].join(', '),
+      country,
+    ].join('\n')
+  } else
+    addr = 'Address Unknown ...'
+
+  return addr
 }
 
 const reverseGeocode = (location: {
@@ -30,7 +43,6 @@ const reverseGeocode = (location: {
   longitude: number,
 }): Promise<string> => {
   const url = GoogleApi + `?latlng=${location.latitude},${location.longitude}`
-  console.log('FETCHING url', url)
 
   return fetch(url).then(resp => {
     if (resp.ok)
