@@ -96,7 +96,7 @@ const MapViewBase = (props: {
   location?: Position,
 }) => {
   const { dispatch, mapViewport, location } = props
-  
+
   const middle = {
     latitude: mapViewport.latitude,
     longitude: mapViewport.longitude,
@@ -104,6 +104,7 @@ const MapViewBase = (props: {
 
   const viewportUpdated = (region) => {
     console.log('updated viewport', region)
+    dispatch(updateRegion(region))
   }
 
   return (
@@ -117,6 +118,45 @@ const mapStateToProps = (state: { mapViewport: MapRegion }) => {
   return { mapViewport: state.mapViewport }
 }
 
+class UpdateWithCurrentLocation extends React.Component {
+  componentWillMount() {
+    const getLocationSucc = (location: Position) => {
+      const region = {
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        latitudeDelta: 0.01534,
+        longitudeDelta: 0.00702,
+      }
+
+      this.props.dispatch(updateRegion(region))
+
+      // n.b.: This fixes a weird UI issue; if setState isn't called
+      // in a setTimeout, then the pin will not render when the current location
+      // is obtained. I think that calling setTimeout allows the view to "stutter"
+      // a bit, causing the pin to render.
+      setTimeout(() => {
+        this.props.dispatch(updateRegion(region))
+      }, 0)
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      getLocationSucc,
+      undefined,
+      {
+        enableHighAccuracy: true,
+        timeout: 2000,
+        maximumAge: 1000
+      }
+    )
+  }
+
+  render () {
+    return (
+      <MapViewBase {...this.props} />
+    )
+  }
+}
+
 export default connect(
   mapStateToProps,
-)(withCurrentLocation(MapViewBase))
+)(UpdateWithCurrentLocation)
