@@ -20,9 +20,11 @@ export const reducer = (
   action: { type: string, address?: string }
 ): ParkingSpot => {
   const { type, address } = action
+  console.log('REDUCER', action)
 
   switch (type) {
     case PARK:
+      console.log('CLICKED PARK!')
       return {
         isParked: true,
         parkedAt: new Date(),
@@ -42,9 +44,10 @@ export const reducer = (
   }
 }
 
-export const parkCar = () => (
-  { type: PARK }
-)
+export const parkCar = () => {
+  console.log('PARK CAR FUNC')
+  return { type: PARK }
+}
 
 export const unparkCar = () => (
   { type: UNPARK }

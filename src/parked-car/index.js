@@ -60,6 +60,7 @@ const ParkedCar = (props: {
   address?: string,
   location: ?Position
 }) => {
+  console.log('RENDERING PARKED CAR', props.location, props.parkedAtCoords)
   const { height } = Dimensions.get('window')
   const onPress = () => {
     props.unparkCar()

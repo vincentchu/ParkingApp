@@ -30,9 +30,7 @@ const SetLocationButtonBase = (props: {
   )
 }
 
-const mapDispatchToProps = () => (
-  { parkCar }
-)
+const mapDispatchToProps = { parkCar }
 
 const SetLocationButton = connect(undefined, mapDispatchToProps)(SetLocationButtonBase)
 
