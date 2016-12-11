@@ -1,32 +1,16 @@
 // @flow
 import React from 'react'
-import { Navigator, Text, Dimensions } from 'react-native'
-import { Button, NavigationBar, Title, Icon, View } from '@shoutem/ui'
+import { Navigator } from 'react-native'
+import { NavigationBar, Title, View } from '@shoutem/ui'
 import Routes from '../routes'
 import MapSelectorView from './MapSelectorView'
-
-const buttonWidth = 300
-const buttonHeight = 40
+import SimpleButton from '../SimpleButton'
 
 const SetLocationButton = (props: { nav: Navigator }) => {
-  const { height, width } = Dimensions.get('window')
   const onPress = () => props.nav.push(Routes.ParkedView)
 
-  const buttonStyle = {
-    position: 'absolute',
-    width: buttonWidth,
-    height: buttonHeight,
-    top: height - 2 * buttonHeight,
-    left: (width - buttonWidth) / 2,
-  }
-
   return (
-    <View style={buttonStyle}>
-      <Button styleName="confirmation" onPress={onPress}>
-        <Icon name="pin" />
-        <Text>Set Car Location</Text>
-      </Button>
-    </View>
+    <SimpleButton icon="pin" text="Set Car Location" onPress={onPress} />
   )
 }
 
