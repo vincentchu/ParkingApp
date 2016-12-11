@@ -1,8 +1,7 @@
 // @flow
 import React from 'react'
 import MapView from 'react-native-maps'
-import { connect } from 'react-redux'
-import { Text, StyleSheet, View, Dimensions } from 'react-native';
+import { Navigator, Text, StyleSheet, View, Dimensions } from 'react-native';
 import { Button, NavigationBar, Title, Icon } from '@shoutem/ui'
 import Routes from './routes'
 import MapSelectorView from './MapSelectorView'
@@ -10,10 +9,9 @@ import MapSelectorView from './MapSelectorView'
 const buttonWidth = 300
 const buttonHeight = 40
 
-const SetLocationButton = ({ onPress, nav }) => {
+const SetLocationButton = ({ nav }) => {
   const { height, width } = Dimensions.get('window')
-
-  const onPress2 = () => nav.push(Routes.ParkedView)
+  const onPress = () => nav.push(Routes.ParkedView)
 
   const buttonStyle = {
     position: 'absolute',
@@ -25,7 +23,7 @@ const SetLocationButton = ({ onPress, nav }) => {
 
   return (
     <View style={buttonStyle}>
-      <Button styleName="confirmation" onPress={onPress2}>
+      <Button styleName="confirmation" onPress={onPress}>
         <Icon name="pin" />
         <Text>Set Car Location</Text>
       </Button>
@@ -33,21 +31,11 @@ const SetLocationButton = ({ onPress, nav }) => {
   )
 }
 
-const mapDispatchToProps = (dispatch: Function) => {
-  return {
-    onPress: () => {
-      console.log('pushed button!!')
-    }
-  }
-}
-
-const ConnectedSetLocationButton = connect(undefined, mapDispatchToProps)(SetLocationButton)
-
-const SetCarLocation = ({ nav }) => (
+const SetCarLocation = (props: { nav: Navigator }) => (
   <View style={{flex: 1}}>
     <MapSelectorView />
     <NavigationBar centerComponent={<Title>Set Location</Title>} />
-    <ConnectedSetLocationButton nav={nav}/>
+    <SetLocationButton nav={props.nav}/>
   </View>
 )
 
