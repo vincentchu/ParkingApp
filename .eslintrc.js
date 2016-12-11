@@ -13,6 +13,7 @@ module.exports = {
     'indent': ['error', 2, {
       SwitchCase: 1,
     }],
+    'no-console': 'warn',
     'no-duplicate-imports': 'off',
     'no-extra-parens': 'off',
     'object-property-newline': ['error', {
