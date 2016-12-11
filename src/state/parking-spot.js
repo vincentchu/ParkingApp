@@ -12,6 +12,7 @@ const InitParkingSpot: ParkingSpot = {
 }
 
 const PARK = 'parking-spot/PARK'
+const UNPARK = 'parking-spot/UNPARK'
 const UPDATE_ADDRESS = 'parking-spot/UPDATE_ADDRESS'
 
 export const reducer = (
@@ -27,6 +28,9 @@ export const reducer = (
         parkedAt: new Date(),
       }
 
+    case UNPARK:
+      return InitParkingSpot
+
     case UPDATE_ADDRESS:
       return {
         ...state,
@@ -40,6 +44,10 @@ export const reducer = (
 
 export const parkCar = () => (
   { type: PARK }
+)
+
+export const unparkCar = () => (
+  { type: UNPARK }
 )
 
 export const updateAddress = (address: string) => (
