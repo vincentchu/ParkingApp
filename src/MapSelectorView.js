@@ -95,8 +95,21 @@ const MapViewBase = (props: {
   mapViewport: MapRegion,
   location?: Position,
 }) => {
+  const { dispatch, mapViewport, location } = props
+  
+  const middle = {
+    latitude: mapViewport.latitude,
+    longitude: mapViewport.longitude,
+  }
+
+  const viewportUpdated = (region) => {
+    console.log('updated viewport', region)
+  }
+
   return (
-    <View><Text>Does this work</Text></View>
+    <MapView style={StyleSheet.absoluteFillObject} showsUserLocation region={mapViewport} onRegionChange={viewportUpdated}>
+      <MapView.Marker coordinate={middle}/>
+    </MapView>
   )
 }
 
