@@ -15,24 +15,25 @@ const style = StyleSheet.create({
   },
 })
 
-const Loading = (props: {
-  nav: Navigator,
-  loadingState: bool,
-  isParked: bool,
-}) => {
-  const { nav, loadingState, isParked } = props
+class Loading extends React.Component {
+  componentWillReceiveProps(nextProps) {
+    const { loadingState, isParked } = nextProps
 
-  if (loadingState) {
-    console.log('LOADING DONE!', isParked)
-    if (isParked)
-      nav.push(Routes.ParkedView)
-    else
-      nav.push(Routes.MapView)
-  } else {
-    console.log('LOADING STILL IN PROGRESS')
+    if (loadingState) {
+      if (isParked)
+        this.props.nav.push(Routes.ParkedView)
+      else
+        this.props.nav.push(Routes.MapView)
+    }
   }
 
-  return (
+  props: {
+    nav: Navigator,
+    loadingState: bool,
+    isParked: bool,
+  }
+
+  render = () => (
     <View style={style.container}>
       <Heading>parkd</Heading>
       <Caption>Loading ...</Caption>
