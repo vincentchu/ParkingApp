@@ -16,7 +16,7 @@ const SetLocationButtonBase = (props: {
 
   const onPress = () => {
     props.parkCar()
-    props.nav.jumpTo(Routes.ParkedView)
+    props.nav.push(Routes.ParkedView)
   }
 
   const style = {
