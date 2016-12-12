@@ -10,11 +10,15 @@ import Routes from './routes'
 import reduxStore from './redux-store'
 import SetCarLocation from './set-car-location'
 import ParkedCar from './parked-car'
+import Loading from './Loading'
 
 import type { ParkingSpot } from './state/parking-spot'
 
 const router = (route, nav) => {
   switch (route.name) {
+    case Routes.LoadingView.name:
+      return (<Loading nav={nav} />)
+
     case Routes.MapView.name:
       return (<SetCarLocation nav={nav} />)
 
@@ -24,7 +28,11 @@ const router = (route, nav) => {
 }
 
 const NavigatorBase = (props: { isParked: bool }) => {
-  const initialRoute = props.isParked ? Routes.ParkedView : Routes.MapView
+  // console.log('isParked', props.isParked)
+  // const initialRoute = props.isParked ? Routes.ParkedView : Routes.MapView
+  // console.log(initialRoute)
+
+  const initialRoute = Routes.LoadingView
 
   return (
     <Navigator initialRoute={initialRoute} renderScene={router} />
@@ -35,6 +43,7 @@ const mapStateToProps = (state: {
   parkingSpot: ParkingSpot,
 }) => {
   const isParked = state.parkingSpot.isParked
+  console.log('STATE', state)
 
   return { isParked }
 }

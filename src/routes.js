@@ -1,6 +1,7 @@
 // @flow
 
 export default {
-  MapView: { index: 0, name: 'MapView' },
-  ParkedView: { index: 0, name: 'ParkedView' },
+  LoadingView: { index: 0, name: 'Loading' },
+  MapView: { index: 1, name: 'MapView' },
+  ParkedView: { index: 2, name: 'ParkedView' },
 }
