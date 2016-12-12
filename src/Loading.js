@@ -20,10 +20,10 @@ class Loading extends React.Component {
     const { loadingState, isParked } = nextProps
 
     if (loadingState) {
+      this.props.nav.jumpTo(Routes.MapView)
+
       if (isParked)
-        this.props.nav.push(Routes.ParkedView)
-      else
-        this.props.nav.push(Routes.MapView)
+        this.props.nav.jumpTo(Routes.ParkedView)
     }
   }
 

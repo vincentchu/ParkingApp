@@ -11,6 +11,7 @@ import SimpleButton from '../SimpleButton'
 import { unparkCar, updateAddress } from '../state/parking-spot'
 import withCurrentLocation from '../with-current-location'
 import reverseGeocode from '../reverse-geocode'
+import Routes from '../routes'
 
 import type { ParkingSpot } from '../state/parking-spot'
 import type { MapRegion } from '../state/map-viewport'
@@ -26,7 +27,7 @@ const ParkedCar = (props: {
   const { height } = Dimensions.get('window')
   const onPress = () => {
     props.dispatch(unparkCar())
-    props.nav.pop()
+    props.nav.jumpTo(Routes.MapView)
   }
 
   const distTxt = props.location ? distanceInWords(props.location.coords, props.parkedAtCoords) : 'Resolving ...'

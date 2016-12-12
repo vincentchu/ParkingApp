@@ -28,14 +28,14 @@ const router = (route, nav) => {
 }
 
 const NavigatorBase = (props: { isParked: bool }) => {
-  // console.log('isParked', props.isParked)
-  // const initialRoute = props.isParked ? Routes.ParkedView : Routes.MapView
-  // console.log(initialRoute)
-
-  const initialRoute = Routes.LoadingView
+  const routeStack = [
+    Routes.LoadingView,
+    Routes.MapView,
+    Routes.ParkedView,
+  ]
 
   return (
-    <Navigator initialRoute={initialRoute} renderScene={router} />
+    <Navigator initialRoute={Routes.LoadingView} initialRouteStack={routeStack} renderScene={router} />
   )
 }
 
