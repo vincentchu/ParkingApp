@@ -43,6 +43,7 @@ const reverseGeocode = (location: {
   longitude: number,
 }): Promise<string> => {
   const url = GoogleApi + `?latlng=${location.latitude},${location.longitude}`
+  console.log('REVERSE GEOCODE', location)
 
   return fetch(url).then(resp => {
     if (resp.ok)

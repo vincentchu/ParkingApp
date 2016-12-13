@@ -20,10 +20,10 @@ class Loading extends React.Component {
     const { loadingState, isParked } = nextProps
 
     if (loadingState) {
-      if (isParked)
-        this.props.nav.immediatelyResetRouteStack([ Routes.MapView, Routes.ParkedView ])
-      else
-        this.props.nav.immediatelyResetRouteStack([ Routes.MapView ])
+      // if (isParked)
+      //   this.props.nav.immediatelyResetRouteStack([ Routes.ParkedView ])
+      // else
+      this.props.nav.immediatelyResetRouteStack([ Routes.MapView ])
     }
   }
 
