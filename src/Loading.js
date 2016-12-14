@@ -16,13 +16,30 @@ const style = StyleSheet.create({
 })
 
 class Loading extends React.Component {
-  componentWilMount() {
-    console.log('MOUNTING', this.props)
+  componentWillMount() {
+    console.log('MOUNTING', this.props.loadingState, this.props.isParked)
+
+    if (this.props.loadingState) {
+      setTimeout(() => {
+        console.log('timing out')
+        if (this.props.isParked) {
+          this.props.nav.push(Routes.ParkedView)
+        } else {
+          this.props.nav.push(Routes.MapView)
+        }
+      }, 500)
+    }
+
+    // setTimeout(() => {
+    //   console.log('timingout')
+    //   this.props.nav.push(Routes.MapView)
+    // }, 500)
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps', nextProps)
+    console.log('componentWillReceiveProps')
     const { loadingState, isParked } = nextProps
+    console.log('here', loadingState, isParked)
 
     if (loadingState) {
       if (isParked) {
@@ -39,12 +56,16 @@ class Loading extends React.Component {
     isParked: bool,
   }
 
-  render = () => (
-    <View style={style.container}>
-      <Heading>parkd</Heading>
-      <Caption>Loading ...</Caption>
-    </View>
-  )
+  render() {
+    const { loadingState, parkingSpot } = this.props
+    console.log('RENDERING!', loadingState, parkingSpot)
+    return (
+      <View style={style.container}>
+        <Heading>parkd</Heading>
+        <Caption>Loading ...</Caption>
+      </View>
+    )
+  }
 }
 
 const mapStateToProps = ({
