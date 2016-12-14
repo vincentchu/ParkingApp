@@ -22,9 +22,9 @@ class Loading extends React.Component {
 
     if (loadingState) {
       if (isParked) {
-        this.props.nav.replace(Routes.ParkedView)
+        this.props.nav.push(Routes.ParkedView)
       } else {
-        this.props.nav.replace(Routes.MapView)
+        this.props.nav.push(Routes.MapView)
       }
     }
 

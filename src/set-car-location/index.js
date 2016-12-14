@@ -18,7 +18,8 @@ const SetLocationButtonBase = (props: {
   const onPress = () => {
     props.parkCar()
     console.log('ROUTE STACK', props.nav.getCurrentRoutes())
-    props.nav.replace(Routes.ParkedView)
+    // props.nav.replace(Routes.ParkedView)
+    props.nav.push(Routes.ParkedView)
     console.log('ROUTE STACK after', props.nav.getCurrentRoutes())
   }
 

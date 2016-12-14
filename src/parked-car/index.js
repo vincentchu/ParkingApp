@@ -27,10 +27,18 @@ const ParkedCar = (props: {
   const { height } = Dimensions.get('window')
   console.log('PARKED CAR VIEW', props.nav.getCurrentRoutes())
   const onPress = () => {
-    console.log('ROUTE STACK', props.nav.getCurrentRoutes())
-    props.nav.replace(Routes.MapView)
-    console.log('ROUTE STACK after', props.nav.getCurrentRoutes())
+    // console.log('ROUTE STACK', props.nav.getCurrentRoutes())
+    // props.nav.replace(Routes.MapView)
+    // console.log('ROUTE STACK after', props.nav.getCurrentRoutes())
     props.dispatch(unparkCar())
+
+    const currRoutes = props.nav.getCurrentRoutes()
+
+    if (currRoutes[currRoutes.length - 2] === Routes.MapView) {
+      props.nav.pop()
+    } else {
+      props.nav.replacePreviousAndPop(Routes.MapView)
+    }
   }
 
   const distTxt = props.location ? distanceInWords(props.location.coords, props.parkedAtCoords) : 'Resolving ...'
