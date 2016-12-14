@@ -18,7 +18,6 @@ const style = StyleSheet.create({
 class Loading extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { loadingState, isParked } = nextProps
-    console.log('LoadingState', loadingState, isParked)
 
     if (loadingState) {
       if (isParked) {
@@ -27,14 +26,6 @@ class Loading extends React.Component {
         this.props.nav.push(Routes.MapView)
       }
     }
-
-
-    // if (loadingState) {
-      // if (isParked)
-      //   this.props.nav.immediatelyResetRouteStack([ Routes.ParkedView ])
-      // else
-      // this.props.nav.immediatelyResetRouteStack([ Routes.MapView ])
-    // }
   }
 
   props: {
@@ -51,13 +42,16 @@ class Loading extends React.Component {
   )
 }
 
-const mapStateToProps = (state: {
+const mapStateToProps = ({
+  loadingState,
+  parkingSpot,
+}: {
   loadingState: bool,
   parkingSpot: ParkingSpot
 }) => (
   {
-    loadingState: state.loadingState,
-    isParked: state.parkingSpot.isParked,
+    loadingState,
+    isParked: parkingSpot.isParked,
   }
 )
 export default connect(mapStateToProps)(Loading)

@@ -16,7 +16,14 @@ import Routes from '../routes'
 import type { ParkingSpot } from '../state/parking-spot'
 import type { MapRegion } from '../state/map-viewport'
 
-const ParkedCar = (props: {
+const ParkedCar = ({
+  nav,
+  dispatch,
+  parkedAtCoords,
+  parkedAt,
+  address,
+  location,
+}: {
   nav: Navigator,
   dispatch: Function,
   parkedAtCoords: { latitude: number, longitude: number },
@@ -25,24 +32,19 @@ const ParkedCar = (props: {
   location: ?Position,
 }) => {
   const { height } = Dimensions.get('window')
-  console.log('PARKED CAR VIEW', props.nav.getCurrentRoutes())
   const onPress = () => {
-    // console.log('ROUTE STACK', props.nav.getCurrentRoutes())
-    // props.nav.replace(Routes.MapView)
-    // console.log('ROUTE STACK after', props.nav.getCurrentRoutes())
-    props.dispatch(unparkCar())
-
-    const currRoutes = props.nav.getCurrentRoutes()
+    dispatch(unparkCar())
+    const currRoutes = nav.getCurrentRoutes()
 
     if (currRoutes[currRoutes.length - 2] === Routes.MapView) {
-      props.nav.pop()
+      nav.pop()
     } else {
-      props.nav.replacePreviousAndPop(Routes.MapView)
+      nav.replacePreviousAndPop(Routes.MapView)
     }
   }
 
-  const distTxt = props.location ? distanceInWords(props.location.coords, props.parkedAtCoords) : 'Resolving ...'
-  const addrTxt = props.address || 'Resolving ...'
+  const distTxt = location ? distanceInWords(location.coords, parkedAtCoords) : 'Resolving ...'
+  const addrTxt = address || 'Resolving ...'
 
   return (
     <View style={{ flex: 1 }}>
@@ -52,7 +54,7 @@ const ParkedCar = (props: {
         <LocationRow icon="pin" text={addrTxt} />
 
         <LocationRow icon="ic_events">
-          <TimeAgo time={props.parkedAt} />
+          <TimeAgo time={parkedAt} />
         </LocationRow>
 
         <LocationRow icon="ic_books" text={distTxt} />
@@ -75,17 +77,12 @@ class ParkedCarWithAddressLoading extends React.Component {
   }
 
   componentWillMount() {
-    console.log('ParkedCarWithAddressLoading mounting')
     if (!this.state.latch) {
       this.setState({ latch: true })
       reverseGeocode(this.props.parkedAtCoords).then(
         addr => this.props.dispatch(updateAddress(addr))
       )
     }
-  }
-
-  componentWilUnmount() {
-    console.log('ParkedCarWithAddressLoading UN MOUNT')
   }
 
   props: {
@@ -104,19 +101,21 @@ class ParkedCarWithAddressLoading extends React.Component {
   }
 }
 
-const mapStateToProps = (state: {
+const mapStateToProps = ({
+  parkingSpot,
+  mapViewport,
+}: {
   parkingSpot: ParkingSpot,
   mapViewport: MapRegion,
 }) => {
   const {
     parkedAt,
     address,
-  } = state.parkingSpot
-
+  } = parkingSpot
 
   const parkedAtCoords = {
-    latitude: state.mapViewport.latitude,
-    longitude: state.mapViewport.longitude,
+    latitude: mapViewport.latitude,
+    longitude: mapViewport.longitude,
   }
 
   return {
