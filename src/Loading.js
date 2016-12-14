@@ -16,24 +16,26 @@ const style = StyleSheet.create({
 })
 
 class Loading extends React.Component {
+  state: {
+    dispatched: bool,
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = { dispatched: false }
+  }
+
   componentWillMount() {
     console.log('MOUNTING', this.props.loadingState, this.props.isParked)
 
-    if (this.props.loadingState) {
-      setTimeout(() => {
-        console.log('timing out')
-        if (this.props.isParked) {
-          this.props.nav.push(Routes.ParkedView)
-        } else {
-          this.props.nav.push(Routes.MapView)
-        }
-      }, 500)
+    if (this.props.loadingState && !this.state.dispatched) {
+      this.setState({ dispatched: true })
+      if (this.props.isParked) {
+        this.props.nav.push(Routes.ParkedView)
+      } else {
+        this.props.nav.push(Routes.MapView)
+      }
     }
-
-    // setTimeout(() => {
-    //   console.log('timingout')
-    //   this.props.nav.push(Routes.MapView)
-    // }, 500)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -41,7 +43,8 @@ class Loading extends React.Component {
     const { loadingState, isParked } = nextProps
     console.log('here', loadingState, isParked)
 
-    if (loadingState) {
+    if (loadingState && !this.state.dispatched) {
+      this.setState({ dispatched: true })
       if (isParked) {
         this.props.nav.push(Routes.ParkedView)
       } else {
