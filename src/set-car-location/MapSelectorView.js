@@ -19,7 +19,6 @@ const MapViewBase = (props: {
   }
 
   const viewportUpdated = (region) => {
-    console.log('dispatch 1', region)
     dispatch(updateRegion(region))
   }
 
@@ -37,7 +36,6 @@ const mapStateToProps = (state: { mapViewport: MapRegion }) => (
 class UpdateWithCurrentLocation extends React.Component {
   componentWillMount() {
     const getLocationSucc = (location: Position) => {
-      console.log('GET LOC SUCC')
       this.watchId !== null && navigator.geolocation.clearWatch(this.watchId)
 
       const region = {
@@ -47,17 +45,15 @@ class UpdateWithCurrentLocation extends React.Component {
         longitudeDelta: deltaLong,
       }
 
-      console.log('222222', region)
       this.props.dispatch(updateRegion(region))
 
       // n.b.: This fixes a weird UI issue; if dispatch isn't called
       // in a setTimeout, then the pin will not render when the current location
       // is obtained. I think that calling setTimeout allows the view to "stutter"
       // a bit, causing the pin to render.
-      // setTimeout(() => {
-      //   console.log('33333333', region)
-      //   this.props.dispatch(updateRegion(region))
-      // }, 0)
+      setTimeout(() => {
+        this.props.dispatch(updateRegion(region))
+      }, 0)
     }
 
     const getLocationErr = (error) => {
