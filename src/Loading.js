@@ -16,7 +16,12 @@ const style = StyleSheet.create({
 })
 
 class Loading extends React.Component {
+  componentWilMount() {
+    console.log('MOUNTING', this.props)
+  }
+
   componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps', nextProps)
     const { loadingState, isParked } = nextProps
 
     if (loadingState) {
