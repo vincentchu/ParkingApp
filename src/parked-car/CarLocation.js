@@ -12,6 +12,7 @@ const CarLocationBase = (props: {
   height: number,
   region: MapRegion
 }) => {
+  console.log('REGION!', region)
   const { height, region } = props
 
   const regionWithZoom = {

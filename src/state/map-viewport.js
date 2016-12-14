@@ -11,8 +11,8 @@ export const deltaLat = 0.01534
 export const deltaLong = 0.00702
 
 const InitialRegion = {
-  latitude: 40.78825,
-  longitude: -122.4324,
+  latitude: 37.7749,
+  longitude: -122.4194,
   latitudeDelta: deltaLat,
   longitudeDelta: deltaLong,
 }
@@ -33,9 +33,7 @@ export const reducer = (
   }
 }
 
-export const updateRegion = (region: MapRegion) => (
-  {
-    type: UPDATE,
-    region,
-  }
-)
+export const updateRegion = (region: MapRegion) => ({
+  type: UPDATE,
+  region,
+})
