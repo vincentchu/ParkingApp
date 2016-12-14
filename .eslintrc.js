@@ -9,7 +9,7 @@ module.exports = {
     'recommended/react-native/style-guide'
   ],
   rules: {
-    'curly': ['error', 'multi-or-nest'],
+    'curly': ['error', 'all'],
     'indent': ['error', 2, {
       SwitchCase: 1,
     }],

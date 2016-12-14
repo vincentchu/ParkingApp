@@ -25,9 +25,12 @@ const ParkedCar = (props: {
   location: ?Position,
 }) => {
   const { height } = Dimensions.get('window')
+  console.log('PARKED CAR VIEW', props.nav.getCurrentRoutes())
   const onPress = () => {
     props.dispatch(unparkCar())
-    props.nav.immediatelyResetRouteStack([ Routes.MapView ])
+    console.log('ROUTE STACK', props.nav.getCurrentRoutes())
+    props.nav.pop()
+    console.log('ROUTE STACK after', props.nav.getCurrentRoutes())
   }
 
   const distTxt = props.location ? distanceInWords(props.location.coords, props.parkedAtCoords) : 'Resolving ...'

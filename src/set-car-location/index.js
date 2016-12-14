@@ -12,11 +12,14 @@ const SetLocationButtonBase = (props: {
   nav: Navigator,
   parkCar: Function,
 }) => {
+  console.log('SET LOCATION BUTTON', props.nav.getCurrentRoutes())
   const { height, width } = Dimensions.get('window')
 
   const onPress = () => {
     props.parkCar()
-    props.nav.immediatelyResetRouteStack([ Routes.ParkedView ])
+    console.log('ROUTE STACK', props.nav.getCurrentRoutes())
+    props.nav.push(Routes.ParkedView)
+    console.log('ROUTE STACK after', props.nav.getCurrentRoutes())
   }
 
   const style = {

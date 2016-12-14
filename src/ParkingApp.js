@@ -25,15 +25,9 @@ const router = (route, nav) => {
   }
 }
 
-const routeStack = [
-  Routes.LoadingView,
-  Routes.MapView,
-  Routes.ParkedView,
-]
-
 const ParkingApp = () => (
   <Provider store={reduxStore}>
-    <Navigator initialRoute={Routes.LoadingView} initialRouteStack={routeStack} renderScene={router} />
+    <Navigator initialRoute={Routes.LoadingView} renderScene={router} />
   </Provider>
 )
 

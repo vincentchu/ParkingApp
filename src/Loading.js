@@ -18,13 +18,23 @@ const style = StyleSheet.create({
 class Loading extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { loadingState, isParked } = nextProps
+    console.log('LoadingState', loadingState, isParked)
 
     if (loadingState) {
+      if (isParked) {
+        this.props.nav.immediatelyResetRouteStack([ Routes.LoadingView, Routes.MapView, Routes.ParkedView ])
+      } else {
+        this.props.nav.immediatelyResetRouteStack([ Routes.LoadingView, Routes.MapView ])
+      }
+    }
+
+
+    // if (loadingState) {
       // if (isParked)
       //   this.props.nav.immediatelyResetRouteStack([ Routes.ParkedView ])
       // else
-      this.props.nav.immediatelyResetRouteStack([ Routes.MapView ])
-    }
+      // this.props.nav.immediatelyResetRouteStack([ Routes.MapView ])
+    // }
   }
 
   props: {

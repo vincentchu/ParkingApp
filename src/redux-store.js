@@ -15,7 +15,8 @@ const reducer = combineReducers({
   loadingState,
 })
 
-const store = createStore(reducer, applyMiddleware(logger), autoRehydrate())
+const store = createStore(reducer, undefined, autoRehydrate())
+// const store = createStore(reducer, applyMiddleware(logger), autoRehydrate())
 persistStore(store, {
   storage: AsyncStorage,
   blacklist: [ 'loadingState' ],
