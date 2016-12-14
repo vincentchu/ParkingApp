@@ -36,9 +36,6 @@ const ParkedCar = ({
     dispatch(unparkCar())
     const currRoutes = nav.getCurrentRoutes()
 
-    console.log('CURR ROUTES', currRoutes)
-    console.log('CURR ROUTE BEF', currRoutes[currRoutes.length - 2])
-
     if (currRoutes[currRoutes.length - 2] === Routes.MapView) {
       nav.pop()
     } else {

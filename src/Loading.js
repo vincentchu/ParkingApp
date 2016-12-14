@@ -16,32 +16,31 @@ const style = StyleSheet.create({
 })
 
 class Loading extends React.Component {
-  state: {
-    dispatched: bool,
-  }
-
   constructor(props) {
     super(props)
     this.state = { dispatched: false }
   }
 
-  componentWillMount() {
-    console.log('MOUNTING', this.props.loadingState, this.props.isParked)
+  state: {
+    dispatched: bool,
+  }
 
-    if (this.props.loadingState && !this.state.dispatched) {
+  componentWillMount() {
+    const { loadingState, isParked, nav } = this.props
+
+    if (loadingState && !this.state.dispatched) {
       this.setState({ dispatched: true })
-      if (this.props.isParked) {
-        this.props.nav.push(Routes.ParkedView)
+
+      if (isParked) {
+        nav.push(Routes.ParkedView)
       } else {
-        this.props.nav.push(Routes.MapView)
+        nav.push(Routes.MapView)
       }
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps')
     const { loadingState, isParked } = nextProps
-    console.log('here', loadingState, isParked)
 
     if (loadingState && !this.state.dispatched) {
       this.setState({ dispatched: true })
@@ -59,9 +58,7 @@ class Loading extends React.Component {
     isParked: bool,
   }
 
-  render() {
-    const { loadingState, parkingSpot } = this.props
-    console.log('RENDERING!', loadingState, parkingSpot)
+  render() { // eslint-disable-line class-methods-use-this
     return (
       <View style={style.container}>
         <Heading>parkd</Heading>
