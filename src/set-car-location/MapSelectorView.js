@@ -36,6 +36,8 @@ const mapStateToProps = (state: { mapViewport: MapRegion }) => (
 class UpdateWithCurrentLocation extends React.Component {
   componentWillMount() {
     const getLocationSucc = (location: Position) => {
+      this.watchId === null && navigator.geolocation.clearWatch(this.watchId)
+
       const region = {
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
@@ -54,9 +56,13 @@ class UpdateWithCurrentLocation extends React.Component {
       }, 0)
     }
 
-    navigator.geolocation.getCurrentPosition(
+    const getLocationErr = (error) => {
+      console.log('Error on fetch location', error) // eslint-disable-line no-console
+    }
+
+    this.watchId = navigator.geolocation.watchPosition(
       getLocationSucc,
-      undefined,
+      getLocationErr,
       {
         enableHighAccuracy: true,
         timeout: 2000,
@@ -64,6 +70,8 @@ class UpdateWithCurrentLocation extends React.Component {
       }
     )
   }
+
+  watchId = null
 
   props: {
     dispatch: Function,
