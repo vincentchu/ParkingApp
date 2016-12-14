@@ -27,10 +27,10 @@ const ParkedCar = (props: {
   const { height } = Dimensions.get('window')
   console.log('PARKED CAR VIEW', props.nav.getCurrentRoutes())
   const onPress = () => {
-    props.dispatch(unparkCar())
     console.log('ROUTE STACK', props.nav.getCurrentRoutes())
-    props.nav.pop()
+    props.nav.replace(Routes.MapView)
     console.log('ROUTE STACK after', props.nav.getCurrentRoutes())
+    props.dispatch(unparkCar())
   }
 
   const distTxt = props.location ? distanceInWords(props.location.coords, props.parkedAtCoords) : 'Resolving ...'
@@ -67,12 +67,17 @@ class ParkedCarWithAddressLoading extends React.Component {
   }
 
   componentWillMount() {
+    console.log('ParkedCarWithAddressLoading mounting')
     if (!this.state.latch) {
       this.setState({ latch: true })
       reverseGeocode(this.props.parkedAtCoords).then(
         addr => this.props.dispatch(updateAddress(addr))
       )
     }
+  }
+
+  componentWilUnmount() {
+    console.log('ParkedCarWithAddressLoading UN MOUNT')
   }
 
   props: {

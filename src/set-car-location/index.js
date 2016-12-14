@@ -18,7 +18,7 @@ const SetLocationButtonBase = (props: {
   const onPress = () => {
     props.parkCar()
     console.log('ROUTE STACK', props.nav.getCurrentRoutes())
-    props.nav.push(Routes.ParkedView)
+    props.nav.replace(Routes.ParkedView)
     console.log('ROUTE STACK after', props.nav.getCurrentRoutes())
   }
 
@@ -37,12 +37,32 @@ const mapDispatchToProps = { parkCar }
 
 const SetLocationButton = connect(undefined, mapDispatchToProps)(SetLocationButtonBase)
 
-const SetCarLocation = (props: { nav: Navigator }) => (
-  <View style={{ flex: 1 }}>
-    <MapSelectorView />
-    <NavigationBar centerComponent={<Title>Set Location</Title>} />
-    <SetLocationButton nav={props.nav} />
-  </View>
-)
+// const SetCarLocation = (props: { nav: Navigator }) => (
+//   <View style={{ flex: 1 }}>
+//     <MapSelectorView />
+//     <NavigationBar centerComponent={<Title>Set Location</Title>} />
+//     <SetLocationButton nav={props.nav} />
+//   </View>
+// )
+
+class SetCarLocation extends React.Component {
+  componentWillMount() {
+    console.log('SetCarLocation mounting')
+  }
+
+  componentWillUnmount() {
+    console.log('SetCarLocation unmounting')
+  }
+
+  render() {
+    return (
+      <View style={{ flex: 1 }}>
+        <MapSelectorView />
+        <NavigationBar centerComponent={<Title>Set Location</Title>} />
+        <SetLocationButton nav={this.props.nav} />
+      </View>
+    )
+  }
+}
 
 export default SetCarLocation
