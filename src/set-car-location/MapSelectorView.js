@@ -37,7 +37,8 @@ const mapStateToProps = (state: { mapViewport: MapRegion }) => (
 class UpdateWithCurrentLocation extends React.Component {
   componentWillMount() {
     const getLocationSucc = (location: Position) => {
-      this.watchId === null && navigator.geolocation.clearWatch(this.watchId)
+      console.log('GET LOC SUCC')
+      this.watchId !== null && navigator.geolocation.clearWatch(this.watchId)
 
       const region = {
         latitude: location.coords.latitude,
