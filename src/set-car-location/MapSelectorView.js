@@ -18,7 +18,7 @@ const MapViewBase = (props: {
     longitude: mapViewport.longitude,
   }
 
-  const viewportUpdated = region => {
+  const viewportUpdated = (region) => {
     dispatch(updateRegion(region))
   }
 

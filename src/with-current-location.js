@@ -30,7 +30,7 @@ const withCurrentLocation = (
       }
 
       const getLocationFail = (error: Object) => {
-        console.log('Failed to get Location', error)
+        console.log('Failed to get Location', error) // eslint-disable-line no-console
       }
 
       const opts = {

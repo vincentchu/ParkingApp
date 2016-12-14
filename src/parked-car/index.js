@@ -80,7 +80,7 @@ class ParkedCarWithAddressLoading extends React.Component {
     if (!this.state.latch) {
       this.setState({ latch: true })
       reverseGeocode(this.props.parkedAtCoords).then(
-        addr => this.props.dispatch(updateAddress(addr))
+        (addr) => this.props.dispatch(updateAddress(addr))
       )
     }
   }

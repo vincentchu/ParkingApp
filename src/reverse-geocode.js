@@ -32,8 +32,9 @@ const parseResponse = (resp: FetchResp): string => {
       [ city, stateZip ].join(', '),
       country,
     ].join('\n')
-  } else
+  } else {
     addr = 'Address Unknown ...'
+  }
 
   return addr
 }
@@ -43,11 +44,11 @@ const reverseGeocode = (location: {
   longitude: number,
 }): Promise<string> => {
   const url = GoogleApi + `?latlng=${location.latitude},${location.longitude}`
-  console.log('REVERSE GEOCODE', location)
 
-  return fetch(url).then(resp => {
-    if (resp.ok)
+  return fetch(url).then((resp) => {
+    if (resp.ok) {
       return resp.json().then(parseResponse)
+    }
   })
 }
 

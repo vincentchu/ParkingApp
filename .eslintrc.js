@@ -9,6 +9,7 @@ module.exports = {
     'recommended/react-native/style-guide'
   ],
   rules: {
+    'arrow-parens': ['error', 'always'],
     'curly': ['error', 'all'],
     'indent': ['error', 2, {
       SwitchCase: 1,
